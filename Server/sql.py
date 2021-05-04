@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker, scoped_session
 
-engine = create_engine('sqlite:///:memory:', echo=True)
-Session = sessionmaker(bind=engine)
+engine = create_engine('sqlite:///cupo.db', echo=True)
+Session = scoped_session(sessionmaker(bind=engine))
 Base = declarative_base()
 
 
@@ -30,4 +30,5 @@ def createUser(email, username, password):
     session = Session()
     session.add(u)
     session.commit()
+    Session.remove()
 
