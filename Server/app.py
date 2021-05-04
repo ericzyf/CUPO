@@ -11,8 +11,8 @@ CORS(app)
 @app.route('/')
 def root():
     return jsonify({
-        'GET': ['/auth'],
-        'POST': ['/create_user']
+        'GET': [],
+        'POST': ['/create_user', '/auth']
     })
 
 
@@ -28,4 +28,17 @@ def create_user():
         return '', 201
     else:
         return '', 409
+
+
+@app.route('/auth', methods=['POST'])
+def auth():
+    req = request.json
+    email = req['email']
+    password = req['password']
+
+    user = sql.findUserByEmail(email)
+    if (user is not None) and (user.password == utils.passwordHash(password, user.timestamp)):
+        return '', 200
+    else:
+        return '', 403
 
