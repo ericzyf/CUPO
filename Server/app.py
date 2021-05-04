@@ -17,5 +17,8 @@ def root():
 @app.route('/create_user', methods=['POST'])
 def create_user():
     req = request.json
-    sql.createUser(req['email'], req['email'], req['password'])
-    return '', 201
+    if sql.createUser(req['email'], req['email'], req['password']):
+        return '', 201
+    else:
+        return '', 409
+
