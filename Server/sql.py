@@ -27,8 +27,8 @@ Base.metadata.create_all(engine)
 def createUser(email, username, password):
     u = User(email=email, username=username, password=password)
 
-    session = Session()
-    session.add(u)
-    session.commit()
+    s = Session()
+    s.add(u)
+    s.commit()
     Session.remove()
 
