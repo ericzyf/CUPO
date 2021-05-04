@@ -39,3 +39,8 @@ def createUser(email, username, password):
     finally:
         Session.remove()
 
+def findUserByEmail(email):
+    s = Session()
+    user = s.query(User).filter(User.email == email).one()
+    return user
+
