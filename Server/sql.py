@@ -41,6 +41,8 @@ def createUser(email, username, password):
 
 def findUserByEmail(email):
     s = Session()
-    user = s.query(User).filter(User.email == email).one()
-    return user
+    try:
+        return s.query(User).filter(User.email == email).one()
+    except exc.SQLAlchemyError:
+        return None
 
