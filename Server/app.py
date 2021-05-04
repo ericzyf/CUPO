@@ -1,4 +1,5 @@
 import sql
+import utils
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import time
@@ -17,9 +18,13 @@ def root():
 
 @app.route('/create_user', methods=['POST'])
 def create_user():
+    ts = int(time.time() * 1000)  # timestamp in millisec
     req = request.json
-    ts = int(time.time() * 1000)
-    if sql.createUser(req['email'], req['email'], req['password'], ts):
+    email = req['email']
+    username = email  # initial username is email
+    password = utils.passwordHash(req['password'], ts)  # hashed password
+
+    if sql.createUser(email, username, password, ts):
         return '', 201
     else:
         return '', 409
