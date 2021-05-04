@@ -14,6 +14,7 @@ class User(Base):
     email = Column(String, nullable=False, unique=True)
     username = Column(String, nullable=False)
     password = Column(String, nullable=False)
+    timestamp = Column(Integer, nullable=False, unique=True)
 
     def __repr__(self):
         return "<User(id={},email='{}',username='{}',password='{}')>".format(self.id, self.email, self.username, self.password)
@@ -24,8 +25,8 @@ Base.metadata.create_all(engine)
 
 
 # APIs
-def createUser(email, username, password):
-    u = User(email=email, username=username, password=password)
+def createUser(email, username, password, ts):
+    u = User(email=email, username=username, password=password, timestamp=ts)
 
     s = Session()
     try:
