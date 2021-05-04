@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy import create_engine, exc, Column, Integer, String
 from sqlalchemy.orm import declarative_base, sessionmaker, scoped_session
 
 engine = create_engine('sqlite:///cupo.db', echo=True)
@@ -28,7 +28,14 @@ def createUser(email, username, password):
     u = User(email=email, username=username, password=password)
 
     s = Session()
-    s.add(u)
-    s.commit()
-    Session.remove()
+    try:
+        s.add(u)
+        s.commit()
+    except exc.SQLAlchemyError:
+        s.rollback()
+        return False
+    else:
+        return True
+    finally:
+        Session.remove()
 
