@@ -46,4 +46,6 @@ def findUserByEmail(email):
         return s.query(User).filter(User.email == email).one()
     except exc.SQLAlchemyError:
         return None
+    finally:
+        Session.remove()
 
