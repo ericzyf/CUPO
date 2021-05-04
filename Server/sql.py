@@ -22,3 +22,12 @@ class User(Base):
 # create all tables
 Base.metadata.create_all(engine)
 
+
+# APIs
+def createUser(email, username, password):
+    u = User(email=email, username=username, password=password)
+
+    session = Session()
+    session.add(u)
+    session.commit()
+
