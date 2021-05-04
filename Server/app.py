@@ -9,7 +9,8 @@ CORS(app)
 @app.route('/')
 def root():
     return jsonify({
-        'POST': '/create_user'
+        'GET': ['/auth'],
+        'POST': ['/create_user']
     })
 
 
