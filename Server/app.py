@@ -52,5 +52,5 @@ def auth():
     if (user is not None) and (user.password == utils.passwordHash(password, user.timestamp)):
         return jsonifyUser(user), 200
     else:
-        return '', 403
+        return '', 401
 
