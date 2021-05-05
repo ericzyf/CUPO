@@ -68,7 +68,10 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         if (response.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Welcome back, " + email, Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(
+                                    new Intent(getApplicationContext(), MainActivity.class)
+                                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK)
+                            );
                         } else {
                             Toast.makeText(getApplicationContext(), "Email or password error", Toast.LENGTH_SHORT).show();
                         }
