@@ -32,6 +32,30 @@ public final class Backend {
         return "http://118.195.184.108:5000" + route;
     }
 
+    public static class User {
+        private int id;
+        public String email;
+        public String username;
+        public String password;
+        private long timestamp;
+
+        public User(final int id, final String email, final String username, final String password, final long timestamp) {
+            this.id = id;
+            this.email = email;
+            this.username = username;
+            this.password = password;
+            this.timestamp = timestamp;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public long getTimestamp() {
+            return timestamp;
+        }
+    }
+
     public void createUser(final String email, final String password, Callback cb) {
         JSONObject json = new JSONObject();
         try {
