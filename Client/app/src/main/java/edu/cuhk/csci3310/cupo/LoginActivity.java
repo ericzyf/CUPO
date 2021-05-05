@@ -31,11 +31,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         gotoSignup.setTextColor(0xff651fff);
-        Activity ctx = this;
         gotoSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ctx, SignupActivity.class));
+                startActivity(new Intent(getApplicationContext(), SignupActivity.class));
             }
         });
     }
