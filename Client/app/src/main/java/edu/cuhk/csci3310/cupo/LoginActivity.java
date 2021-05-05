@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -68,6 +69,20 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         if (response.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Welcome back, " + email, Toast.LENGTH_SHORT).show();
+
+                            // parse response
+                            try {
+                                JSONObject userJson = new JSONObject(response.body().string());
+                                MainActivity.USER = new Backend.User(
+                                        userJson.getString("email"),
+                                        userJson.getString("username"),
+                                        userJson.getLong("timestamp")
+                                );
+                            } catch (Exception e) {
+
+                            }
+
+                            // goto MainActivity
                             startActivity(
                                     new Intent(getApplicationContext(), MainActivity.class)
                                             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK)
