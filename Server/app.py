@@ -33,7 +33,11 @@ def create_user():
     password = utils.passwordHash(req['password'], ts)  # hashed password
 
     if sql.createUser(email, username, password, ts):
-        return '', 201
+        return jsonify({
+                'email': email,
+                'username': username,
+                'timestamp': ts
+            }), 201
     else:
         return '', 409
 
