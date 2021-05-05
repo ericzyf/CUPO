@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -18,10 +19,20 @@ public class LoginActivity extends AppCompatActivity {
         EditText loginEmailInput = findViewById(R.id.loginEmailInput);
         EditText loginPasswordInput = findViewById(R.id.loginPasswordInput);
         Button loginButton = findViewById(R.id.loginButton);
+        TextView signUp = findViewById(R.id.signUp);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("cupo", loginEmailInput.getText().toString() + " " + loginPasswordInput.getText().toString());
+            }
+        });
+
+        signUp.setTextColor(0xff651fff);
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("cupo", "create account");
             }
         });
     }
