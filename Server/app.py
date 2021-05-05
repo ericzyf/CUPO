@@ -16,6 +16,14 @@ def root():
     })
 
 
+def jsonifyUser(user):
+    return jsonify({
+        'email': user.email,
+        'username': user.username,
+        'timestamp': user.timestamp
+    })
+
+
 @app.route('/create_user', methods=['POST'])
 def create_user():
     ts = int(time.time() * 1000)  # timestamp in millisec
@@ -38,12 +46,7 @@ def auth():
 
     user = sql.findUserByEmail(email)
     if (user is not None) and (user.password == utils.passwordHash(password, user.timestamp)):
-        return jsonify({
-                'id': user.id,
-                'email': user.email,
-                'username': user.username,
-                'timestamp': user.timestamp
-            }), 200
+        return jsonifyUser(user), 200
     else:
         return '', 403
 
