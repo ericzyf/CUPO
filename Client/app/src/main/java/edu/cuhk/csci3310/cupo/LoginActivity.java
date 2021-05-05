@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         EditText loginEmailInput = findViewById(R.id.loginEmailInput);
         EditText loginPasswordInput = findViewById(R.id.loginPasswordInput);
         Button loginButton = findViewById(R.id.loginButton);
-        TextView signUp = findViewById(R.id.signUp);
+        TextView gotoSignup = findViewById(R.id.gotoSignup);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,9 +30,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        signUp.setTextColor(0xff651fff);
+        gotoSignup.setTextColor(0xff651fff);
         Activity ctx = this;
-        signUp.setOnClickListener(new View.OnClickListener() {
+        gotoSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ctx, SignupActivity.class));
