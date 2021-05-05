@@ -75,4 +75,24 @@ public final class Backend {
 
         httpClient.newCall(request).enqueue(cb);
     }
+
+    public void auth(final String email, final String password, Callback cb) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("email", email);
+            json.put("password", password);
+        } catch (Exception e) {
+
+        }
+
+        RequestBody body = RequestBody.create(json.toString(), JSON);
+        Request request = new Request.Builder()
+                .url(api("/auth"))
+                .post(body)
+                .build();
+
+        Log.d("cupo", "POST /auth\n" + json.toString());
+
+        httpClient.newCall(request).enqueue(cb);
+    }
 }

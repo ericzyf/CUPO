@@ -2,7 +2,6 @@ package edu.cuhk.csci3310.cupo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +9,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -26,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("cupo", loginEmailInput.getText().toString() + " " + loginPasswordInput.getText().toString());
+                handleLogin(loginEmailInput.getText().toString(), loginPasswordInput.getText().toString());
             }
         });
 
@@ -35,6 +43,37 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), SignupActivity.class));
+            }
+        });
+    }
+
+    private void handleLogin(final String email, final String password) {
+        Log.d("cupo", email + "," + password);
+
+        if (email.length() == 0 || password.length() == 0) {
+            Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Backend.getInstance().auth(email, password, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.d("cupo", e.toString());
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Welcome back, " + email, Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Email or password error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
     }
