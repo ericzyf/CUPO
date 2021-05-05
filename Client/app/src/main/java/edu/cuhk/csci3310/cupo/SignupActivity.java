@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -30,6 +31,17 @@ public class SignupActivity extends AppCompatActivity {
                         signupPasswordInput2.getText().toString()
                 );
                 Log.d("cupo", "handleSignup: " + res);
+
+                switch (res) {
+                    case 1: {
+                        Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    case 2: {
+                        Toast.makeText(getApplicationContext(), "Password and confirmation password mismatch", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                }
             }
         });
     }
