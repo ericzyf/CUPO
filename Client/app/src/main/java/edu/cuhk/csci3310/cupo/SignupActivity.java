@@ -2,6 +2,7 @@ package edu.cuhk.csci3310.cupo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -79,6 +81,24 @@ public class SignupActivity extends AppCompatActivity {
                     public void run() {
                         if (response.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Account created successfully", Toast.LENGTH_SHORT).show();
+
+                            // parse response
+                            try {
+                                JSONObject userJson = new JSONObject(response.body().string());
+                                MainActivity.USER = new Backend.User(
+                                        userJson.getString("email"),
+                                        userJson.getString("username"),
+                                        userJson.getLong("timestamp")
+                                );
+                            } catch (Exception e) {
+
+                            }
+
+                            // goto MainActivity
+                            startActivity(
+                                    new Intent(getApplicationContext(), MainActivity.class)
+                                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK)
+                            );
                         } else {
                             Toast.makeText(getApplicationContext(), "Account already exists", Toast.LENGTH_SHORT).show();
                         }
