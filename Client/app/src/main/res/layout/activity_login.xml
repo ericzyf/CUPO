@@ -8,6 +8,7 @@
 
     <EditText
         android:id="@+id/loginPasswordInput"
+        android:hint="Password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -19,6 +20,7 @@
 
     <EditText
         android:id="@+id/loginEmailInput"
+        android:hint="CUHK Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
