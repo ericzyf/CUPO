@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static Backend.User USER = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
