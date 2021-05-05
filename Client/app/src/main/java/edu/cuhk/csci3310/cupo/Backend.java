@@ -33,22 +33,14 @@ public final class Backend {
     }
 
     public static class User {
-        private int id;
         public String email;
         public String username;
-        public String password;
         private long timestamp;
 
-        public User(final int id, final String email, final String username, final String password, final long timestamp) {
-            this.id = id;
+        public User(final String email, final String username, final long timestamp) {
             this.email = email;
             this.username = username;
-            this.password = password;
             this.timestamp = timestamp;
-        }
-
-        public int getId() {
-            return id;
         }
 
         public long getTimestamp() {
