@@ -7,12 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import okhttp3.OkHttpClient;
-
 public class MainActivity extends AppCompatActivity {
 
     public static final String SHARED_PREFS = "edu.cuhk.csci3310.cupo.pref";
-    public static final OkHttpClient httpClient = new OkHttpClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
