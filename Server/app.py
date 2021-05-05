@@ -24,8 +24,8 @@ def jsonifyUser(user):
     })
 
 
-@app.route('/create_user', methods=['POST'])
-def create_user():
+@app.route('/users', methods=['POST'])
+def users():
     ts = int(time.time() * 1000)  # timestamp in millisec
     req = request.json
     email = req['email']
