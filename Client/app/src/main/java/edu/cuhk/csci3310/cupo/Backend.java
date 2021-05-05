@@ -18,4 +18,8 @@ public final class Backend {
         }
         return Instance;
     }
+
+    public String api(final String route) {
+        return "http://118.195.184.108:5000" + route;
+    }
 }
