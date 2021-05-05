@@ -24,8 +24,18 @@ public class SignupActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("cupo", signupEmailInput.getText().toString() + "," + signupPasswordInput.getText().toString() + "," + signupPasswordInput2.getText().toString());
+                int res = handleSignup(
+                        signupEmailInput.getText().toString(),
+                        signupPasswordInput.getText().toString(),
+                        signupPasswordInput2.getText().toString()
+                );
             }
         });
+    }
+
+    private int handleSignup(String email, String pwd, String pwd2) {
+        // TODO
+        Log.d("cupo", email + "," + pwd + "," + pwd2);
+        return 0;
     }
 }
