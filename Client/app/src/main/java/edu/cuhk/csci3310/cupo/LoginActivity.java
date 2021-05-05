@@ -2,6 +2,8 @@ package edu.cuhk.csci3310.cupo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,10 +31,11 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         signUp.setTextColor(0xff651fff);
+        Activity ctx = this;
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("cupo", "create account");
+                startActivity(new Intent(ctx, SignupActivity.class));
             }
         });
     }
