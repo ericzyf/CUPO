@@ -29,13 +29,30 @@ public class SignupActivity extends AppCompatActivity {
                         signupPasswordInput.getText().toString(),
                         signupPasswordInput2.getText().toString()
                 );
+                Log.d("cupo", "handleSignup: " + res);
             }
         });
     }
 
+    /**
+     * @param email
+     * @param pwd
+     * @param pwd2
+     * @return
+     * 0: success
+     * 1: has incomplete fields
+     * 2: pwd != pwd2
+     */
     private int handleSignup(String email, String pwd, String pwd2) {
         // TODO
         Log.d("cupo", email + "," + pwd + "," + pwd2);
+        if (email.length() == 0 || pwd.length() == 0 || pwd2.length() == 0) {
+            return 1;
+        }
+        if (!pwd.equals(pwd2)) {
+            return 2;
+        }
+
         return 0;
     }
 }
