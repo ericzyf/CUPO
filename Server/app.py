@@ -1,5 +1,6 @@
 import sql
 import utils
+import verification
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import time
@@ -11,6 +12,7 @@ CORS(app)
 @app.route('/')
 def root():
     return jsonify({
+        '/v': ['POST'],
         '/users': ['POST'],
         '/users/password': ['PUT'],
         '/users/gender': ['PUT'],
@@ -18,6 +20,17 @@ def root():
         '/users/bio': ['PUT'],
         '/auth': ['POST']
     })
+
+
+@app.route('/v', methods=['POST'])
+def send_verification_code():
+    req = request.json
+    email = req['email']
+    if utils.isCUHKEmail(email):
+        verification.sendCode(email)
+        return '', 202
+    else:
+        return '', 400
 
 
 def jsonifyUser(user):
