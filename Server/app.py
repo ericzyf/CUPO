@@ -21,7 +21,9 @@ def jsonifyUser(user):
     return jsonify({
         'email': user.email,
         'username': user.username,
-        'timestamp': user.timestamp
+        'timestamp': user.timestamp,
+        'gender': user.gender,
+        'phone': user.phone
     })
 
 
@@ -34,11 +36,7 @@ def users():
     password = utils.passwordHash(req['password'], ts)  # hashed password
 
     if sql.createUser(email, username, password, ts):
-        return jsonify({
-            'email': email,
-            'username': username,
-            'timestamp': ts
-        }), 201
+        return jsonifyUser( sql.User(email=email, username=username, password=password, timestamp=ts) ), 201
     else:
         return '', 409
 
