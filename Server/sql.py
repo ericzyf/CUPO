@@ -16,8 +16,8 @@ class User(Base):
     username = Column(String, nullable=False)
     password = Column(String, nullable=False)
     timestamp = Column(Integer, nullable=False, unique=True)
-    gender = Column(String)
-    phone = Column(String)
+    gender = Column(String, default='')
+    phone = Column(String, default='')
 
     def __repr__(self):
         return "<User(id={},email='{}',username='{}',password='{}',timestamp={},gender='{}',phone='{}')>".format(self.id, self.email, self.username, self.password, self.timestamp, self.gender, self.phone)
