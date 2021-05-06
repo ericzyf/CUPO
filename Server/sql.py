@@ -65,3 +65,17 @@ def updateUserPassword(email, newPassword):
     finally:
         Session.remove()
 
+def setUserData(email, k, v):
+    s = Session()
+    try:
+        u = s.query(User).filter(User.email == email).one()
+        setattr(u, k, v)
+        s.commit()
+    except exc.SQLAlchemyError:
+        s.rollback()
+        return False
+    else:
+        return True
+    finally:
+        Session.remove()
+
