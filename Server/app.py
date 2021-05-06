@@ -38,7 +38,7 @@ def users():
     password = utils.passwordHash(req['password'], ts)  # hashed password
 
     if sql.createUser(email, username, password, ts):
-        return jsonifyUser( sql.User(email=email, username=username, password=password, timestamp=ts) ), 201
+        return jsonifyUser( sql.User(email=email, username=username, password=password, timestamp=ts, gender='', phone='') ), 201
     else:
         return '', 409
 
