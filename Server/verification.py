@@ -51,3 +51,13 @@ def sendCode(recv):
         # send
         sendMail(recv, newCode)
 
+
+def verifyCode(recv, code):
+    res = R.get(recv)
+    if (res is not None) and (code == res.decode()):
+        # delete from redis
+        R.delete(recv)
+        return True
+    else:
+        return False
+
