@@ -1,3 +1,4 @@
+import utils
 from sqlalchemy import create_engine, exc, Column, Integer, String
 from sqlalchemy.orm import declarative_base, sessionmaker, scoped_session
 
@@ -29,7 +30,6 @@ Base.metadata.create_all(engine)
 # APIs
 def createUser(email, username, password, ts):
     u = User(email=email, username=username, password=password, timestamp=ts)
-
     s = Session()
     try:
         s.add(u)
@@ -48,6 +48,20 @@ def findUserByEmail(email):
         return s.query(User).filter(User.email == email).one()
     except exc.SQLAlchemyError:
         return None
+    finally:
+        Session.remove()
+
+def updateUserPassword(email, newPassword):
+    s = Session()
+    try:
+        u = s.query(User).filter(User.email == email).one()
+        u.password = utils.passwordHash(newPassword, u.timestamp)
+        s.commit()
+    except exc.SQLAlchemyError:
+        s.rollback()
+        return False
+    else:
+        return True
     finally:
         Session.remove()
 

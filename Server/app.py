@@ -42,6 +42,18 @@ def users():
         return '', 409
 
 
+@app.route('/users/password', methods=['PUT'])
+def users_password():
+    req = request.json
+    email = req['email']
+    password = req['password']
+
+    if sql.updateUserPassword(email, password):
+        return '', 201
+    else:
+        return '', 401
+
+
 @app.route('/auth', methods=['POST'])
 def auth():
     req = request.json
