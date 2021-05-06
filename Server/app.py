@@ -53,6 +53,30 @@ def users_password():
         return '', 401
 
 
+@app.route('/users/gender', methods=['PUT'])
+def users_gender():
+    req = request.json
+    email = req['email']
+    gender = req['gender']
+
+    if sql.setUserData(email, 'gender', gender):
+        return '', 201
+    else:
+        return '', 401
+
+
+@app.route('/users/phone', methods=['PUT'])
+def users_phone():
+    req = request.json
+    email = req['email']
+    phone = req['phone']
+
+    if sql.setUserData(email, 'phone', phone):
+        return '', 201
+    else:
+        return '', 401
+
+
 @app.route('/auth', methods=['POST'])
 def auth():
     req = request.json
