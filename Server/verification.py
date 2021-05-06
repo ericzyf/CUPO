@@ -6,7 +6,7 @@ from email.message import EmailMessage
 
 
 # Return a random string consists of uppercase letters and digits of length 6
-def genVerificationCode():
+def genCode():
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
 
 
