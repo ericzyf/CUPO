@@ -15,6 +15,7 @@ def root():
         '/users/password': ['PUT'],
         '/users/gender': ['PUT'],
         '/users/phone': ['PUT'],
+        '/users/bio': ['PUT'],
         '/auth': ['POST']
     })
 
@@ -25,7 +26,8 @@ def jsonifyUser(user):
         'username': user.username,
         'timestamp': user.timestamp,
         'gender': user.gender,
-        'phone': user.phone
+        'phone': user.phone,
+        'bio': user.bio
     })
 
 
@@ -38,7 +40,7 @@ def users():
     password = utils.passwordHash(req['password'], ts)  # hashed password
 
     if sql.createUser(email, username, password, ts):
-        return jsonifyUser( sql.User(email=email, username=username, password=password, timestamp=ts, gender='', phone='') ), 201
+        return jsonifyUser( sql.User(email=email, username=username, password=password, timestamp=ts, gender='', phone='', bio='') ), 201
     else:
         return '', 409
 
@@ -74,6 +76,18 @@ def users_phone():
     phone = req['phone']
 
     if sql.setUserData(email, 'phone', phone):
+        return '', 201
+    else:
+        return '', 401
+
+
+@app.route('/users/bio', methods=['PUT'])
+def users_bio():
+    req = request.json
+    email = req['email']
+    bio = req['bio']
+
+    if sql.setUserData(email, 'bio', bio):
         return '', 201
     else:
         return '', 401
