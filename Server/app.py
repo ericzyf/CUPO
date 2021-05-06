@@ -13,6 +13,8 @@ def root():
     return jsonify({
         '/users': ['POST'],
         '/users/password': ['PUT'],
+        '/users/gender': ['PUT'],
+        '/users/phone': ['PUT'],
         '/auth': ['POST']
     })
 
