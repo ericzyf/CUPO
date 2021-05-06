@@ -10,7 +10,7 @@ def genCode():
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
 
 
-def sendCode(recv, code):
+def sendMail(recv, code):
     # load account info from .env
     env = dotenv_values('.env')
     SENDER = env['VERIFICATION_EMAIL']
