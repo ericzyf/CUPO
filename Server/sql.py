@@ -18,9 +18,10 @@ class User(Base):
     timestamp = Column(Integer, nullable=False, unique=True)
     gender = Column(String, default='')
     phone = Column(String, default='')
+    bio = Column(String, default='')
 
     def __repr__(self):
-        return "<User(id={},email='{}',username='{}',password='{}',timestamp={},gender='{}',phone='{}')>".format(self.id, self.email, self.username, self.password, self.timestamp, self.gender, self.phone)
+        return "<User(id={},email='{}',username='{}',password='{}',timestamp={},gender='{}',phone='{}',bio='{}')>".format(self.id, self.email, self.username, self.password, self.timestamp, self.gender, self.phone, self.bio)
 
 
 # create all tables
