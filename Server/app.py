@@ -54,7 +54,7 @@ def users_password():
     if sql.updateUserPassword(email, password):
         return '', 201
     else:
-        return '', 401
+        return '', 404
 
 
 @app.route('/users/gender', methods=['PUT'])
@@ -66,7 +66,7 @@ def users_gender():
     if sql.setUserData(email, 'gender', gender):
         return '', 201
     else:
-        return '', 401
+        return '', 404
 
 
 @app.route('/users/phone', methods=['PUT'])
@@ -78,7 +78,7 @@ def users_phone():
     if sql.setUserData(email, 'phone', phone):
         return '', 201
     else:
-        return '', 401
+        return '', 404
 
 
 @app.route('/users/bio', methods=['PUT'])
@@ -90,7 +90,7 @@ def users_bio():
     if sql.setUserData(email, 'bio', bio):
         return '', 201
     else:
-        return '', 401
+        return '', 404
 
 
 @app.route('/auth', methods=['POST'])
