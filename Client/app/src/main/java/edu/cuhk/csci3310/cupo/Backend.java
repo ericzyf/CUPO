@@ -59,11 +59,11 @@ public final class Backend {
 
         RequestBody body = RequestBody.create(json.toString(), JSON);
         Request request = new Request.Builder()
-                .url(api("/create_user"))
+                .url(api("/users"))
                 .post(body)
                 .build();
 
-        Log.d("cupo", "POST /create_user\n" + json.toString());
+        Log.d("cupo", "POST /users\n" + json.toString());
 
         httpClient.newCall(request).enqueue(cb);
     }
