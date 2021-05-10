@@ -36,6 +36,9 @@ public final class Backend {
         public String email;
         public String username;
         private long timestamp;
+        public String gender;
+        public String phone;
+        public String bio;
 
         public User(final String email, final String username, final long timestamp) {
             this.email = email;
