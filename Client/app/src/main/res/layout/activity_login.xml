@@ -20,11 +20,11 @@
 
     <EditText
         android:id="@+id/loginEmailInput"
-        android:hint="CUHK Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="180dp"
         android:ems="10"
+        android:hint="CUHK Email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
