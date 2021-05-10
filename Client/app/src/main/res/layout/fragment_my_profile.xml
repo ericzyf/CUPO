@@ -1,13 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MyProfileFragment">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="My Profile" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/profileTitleEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/profileEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User.email"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/profileTitleEmail"
+            app:layout_constraintTop_toBottomOf="@+id/profileTitleEmail" />
+
+        <TextView
+            android:id="@+id/profileTitleUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Username"
+            app:layout_constraintStart_toStartOf="@+id/profileEmail"
+            app:layout_constraintTop_toBottomOf="@+id/profileEmail" />
+
+        <EditText
+            android:id="@+id/profileUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            app:layout_constraintStart_toStartOf="@+id/profileTitleUsername"
+            app:layout_constraintTop_toBottomOf="@+id/profileTitleUsername" />
+
+        <TextView
+            android:id="@+id/profileTitleGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Gender"
+            app:layout_constraintStart_toStartOf="@+id/profileUsername"
+            app:layout_constraintTop_toBottomOf="@+id/profileUsername" />
+
+        <EditText
+            android:id="@+id/profileGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            app:layout_constraintStart_toStartOf="@+id/profileTitleGender"
+            app:layout_constraintTop_toBottomOf="@+id/profileTitleGender" />
+
+        <TextView
+            android:id="@+id/profileTitlePhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Phone"
+            app:layout_constraintStart_toStartOf="@+id/profileGender"
+            app:layout_constraintTop_toBottomOf="@+id/profileGender" />
+
+        <EditText
+            android:id="@+id/profilePhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            app:layout_constraintStart_toStartOf="@+id/profileTitlePhone"
+            app:layout_constraintTop_toBottomOf="@+id/profileTitlePhone" />
+
+        <TextView
+            android:id="@+id/profileTitleBio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Bio"
+            app:layout_constraintStart_toStartOf="@+id/profilePhone"
+            app:layout_constraintTop_toBottomOf="@+id/profilePhone" />
+
+        <EditText
+            android:id="@+id/profileBio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            app:layout_constraintStart_toStartOf="@+id/profileTitleBio"
+            app:layout_constraintTop_toBottomOf="@+id/profileTitleBio" />
+
+        <Button
+            android:id="@+id/profileSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileBio" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
