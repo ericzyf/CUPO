@@ -68,8 +68,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if (response.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Welcome back, " + email, Toast.LENGTH_SHORT).show();
-
                             // parse response
                             try {
                                 JSONObject userJson = new JSONObject(response.body().string());
@@ -84,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
                             } catch (Exception e) {
 
                             }
+
+                            Toast.makeText(getApplicationContext(), "Welcome back, " + MainActivity.USER.username, Toast.LENGTH_SHORT).show();
 
                             // goto MainActivity
                             startActivity(
