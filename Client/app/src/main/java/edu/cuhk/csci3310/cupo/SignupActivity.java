@@ -45,6 +45,40 @@ public class SignupActivity extends AppCompatActivity {
         });
         // hide progress bar onCreate
         signupProgress.setVisibility(View.GONE);
+
+        Button v = findViewById(R.id.signupV);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String email = signupEmailInput.getText().toString();
+                if (email.length() == 0) {
+                    Toast.makeText(getApplicationContext(), "Please fill in your email address", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Backend.getInstance().verificationPost(email, new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        Log.d("cupo", e.toString());
+                    }
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (response.isSuccessful()) {
+                                    Toast.makeText(getApplicationContext(), "Verification code has been sent to your CUHK mailbox", Toast.LENGTH_SHORT).show();
+                                    v.setEnabled(false);
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Please use CUHK Email", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 
     private void handleSignup(final String email, final String pwd, final String pwd2) {
