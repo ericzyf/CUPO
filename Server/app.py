@@ -14,6 +14,7 @@ def root():
     return jsonify({
         '/v': ['POST', 'PUT'],
         '/users': ['POST'],
+        '/users/username': ['PUT'],
         '/users/password': ['PUT'],
         '/users/gender': ['PUT'],
         '/users/phone': ['PUT'],
@@ -68,6 +69,22 @@ def users():
         return jsonifyUser( sql.User(email=email, username=username, password=password, timestamp=ts, gender='', phone='', bio='') ), 201
     else:
         return '', 409
+
+
+@app.route('/users/username', methods=['PUT'])
+def users_username():
+    req = request.json
+    email = req['email']
+    username = req['username']
+
+    # reject empty string as username
+    if username == '':
+        return '', 400
+
+    if sql.setUserData(email, 'username', username):
+        return '', 201
+    else:
+        return '', 404
 
 
 @app.route('/users/password', methods=['PUT'])
