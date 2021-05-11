@@ -90,4 +90,64 @@ public final class Backend {
 
         httpClient.newCall(request).enqueue(cb);
     }
+
+    public void updateGender(final String email, final String gender, Callback cb) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("email", email);
+            json.put("gender", gender);
+        } catch (Exception e) {
+
+        }
+
+        RequestBody body = RequestBody.create(json.toString(), JSON);
+        Request request = new Request.Builder()
+                .url(api("/users/gender"))
+                .put(body)
+                .build();
+
+        Log.d("cupo", "PUT /users/gender\n" + json.toString());
+
+        httpClient.newCall(request).enqueue(cb);
+    }
+
+    public void updatePhone(final String email, final String phone, Callback cb) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("email", email);
+            json.put("phone", phone);
+        } catch (Exception e) {
+
+        }
+
+        RequestBody body = RequestBody.create(json.toString(), JSON);
+        Request request = new Request.Builder()
+                .url(api("/users/phone"))
+                .put(body)
+                .build();
+
+        Log.d("cupo", "PUT /users/phone\n" + json.toString());
+
+        httpClient.newCall(request).enqueue(cb);
+    }
+
+    public void updateBio(final String email, final String bio, Callback cb) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("email", email);
+            json.put("bio", bio);
+        } catch (Exception e) {
+
+        }
+
+        RequestBody body = RequestBody.create(json.toString(), JSON);
+        Request request = new Request.Builder()
+                .url(api("/users/bio"))
+                .put(body)
+                .build();
+
+        Log.d("cupo", "PUT /users/bio\n" + json.toString());
+
+        httpClient.newCall(request).enqueue(cb);
+    }
 }
