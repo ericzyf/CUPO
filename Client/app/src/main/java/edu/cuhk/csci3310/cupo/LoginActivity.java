@@ -3,6 +3,7 @@ package edu.cuhk.csci3310.cupo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         gotoSignup.setTextColor(0xff651fff);
+        gotoSignup.setTypeface(gotoSignup.getTypeface(), Typeface.BOLD);
         gotoSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
