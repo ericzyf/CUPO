@@ -1,5 +1,5 @@
 import utils
-from sqlalchemy import create_engine, exc, Column, Integer, String
+from sqlalchemy import create_engine, exc, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import declarative_base, sessionmaker, scoped_session
 
 engine = create_engine('sqlite:///cupo.db', echo=True)
@@ -22,6 +22,16 @@ class User(Base):
 
     def __repr__(self):
         return "<User(id={},email='{}',username='{}',password='{}',timestamp={},gender='{}',phone='{}',bio='{}')>".format(self.id, self.email, self.username, self.password, self.timestamp, self.gender, self.phone, self.bio)
+
+
+class Post(Base):
+    __tablename__ = 'posts'
+
+    id = Column(Integer, primary_key=True)
+    author_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    title = Column(String, nullable=False)
+    content = Column(String, nullable=False)
+    timestamp = Column(Integer, nullable=False)
 
 
 # create all tables
