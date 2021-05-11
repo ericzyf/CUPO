@@ -44,6 +44,9 @@ public final class Backend {
             this.email = email;
             this.username = username;
             this.timestamp = timestamp;
+            this.gender = "";
+            this.phone = "";
+            this.bio = "";
         }
 
         public long getTimestamp() {

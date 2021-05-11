@@ -12,6 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+
 public class MyProfileFragment extends Fragment {
 
     final Backend.User user = MainActivity.USER;
@@ -48,10 +56,118 @@ public class MyProfileFragment extends Fragment {
         profileSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user.username = profileUsername.getText().toString();
-                user.gender = profileGender.getText().toString();
-                user.phone = profilePhone.getText().toString();
-                user.bio = profileBio.getText().toString();
+                updateUsername();
+                updateGender();
+                updatePhone();
+                updateBio();
+            }
+        });
+    }
+
+    private void updateUsername() {
+        final String email = profileEmail.getText().toString();
+        final String username = profileUsername.getText().toString();
+
+        Backend.getInstance().updateUsername(email, username, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.d("cupo", e.toString());
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (response.isSuccessful()) {
+                            // update USER
+                            user.username = username;
+                            // update UI
+                            profileUsername.setText(username);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    private void updateGender() {
+        final String email = profileEmail.getText().toString();
+        final String gender = profileGender.getText().toString();
+
+        Backend.getInstance().updateGender(email, gender, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.d("cupo", e.toString());
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (response.isSuccessful()) {
+                            // update USER
+                            user.gender = gender;
+                            // update UI
+                            profileGender.setText(gender);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    private void updatePhone() {
+        final String email = profileEmail.getText().toString();
+        final String phone = profilePhone.getText().toString();
+
+        Backend.getInstance().updatePhone(email, phone, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.d("cupo", e.toString());
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (response.isSuccessful()) {
+                            // update USER
+                            user.phone = phone;
+                            // update UI
+                            profilePhone.setText(phone);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    private void updateBio() {
+        final String email = profileEmail.getText().toString();
+        final String bio = profileBio.getText().toString();
+
+        Backend.getInstance().updateBio(email, bio, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.d("cupo", e.toString());
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (response.isSuccessful()) {
+                            // update USER
+                            user.bio = bio;
+                            // update UI
+                            profileBio.setText(bio);
+                        }
+                    }
+                });
             }
         });
     }

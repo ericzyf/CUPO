@@ -78,6 +78,9 @@ public class LoginActivity extends AppCompatActivity {
                                         userJson.getString("username"),
                                         userJson.getLong("timestamp")
                                 );
+                                MainActivity.USER.gender = userJson.getString("gender");
+                                MainActivity.USER.phone = userJson.getString("phone");
+                                MainActivity.USER.bio = userJson.getString("bio");
                             } catch (Exception e) {
 
                             }
