@@ -15,7 +15,7 @@ class User(Base):
     email = Column(String, nullable=False, unique=True)
     username = Column(String, nullable=False)
     password = Column(String, nullable=False)
-    timestamp = Column(Integer, nullable=False, unique=True)
+    timestamp = Column(Integer, nullable=False)
     gender = Column(String, default='')
     phone = Column(String, default='')
     bio = Column(String, default='')
