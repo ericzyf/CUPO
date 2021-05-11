@@ -37,6 +37,16 @@ class Post(Base):
         return "<Post(id={},author_id={},title='{}',content='{}',timestamp={})>".format(self.id, self.author_id, self.title, self.content, self.timestamp)
 
 
+class PostReply(Base):
+    __tablename__ = 'post_replies'
+
+    id = Column(Integer, primary_key=True)
+    post_id = Column(Integer, ForeignKey('posts.id'), nullable=False)
+    author_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    content = Column(String, nullable=False)
+    timestamp = Column(Integer, nullable=False)
+
+
 # create all tables
 Base.metadata.create_all(engine)
 
