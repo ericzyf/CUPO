@@ -46,6 +46,9 @@ class PostReply(Base):
     content = Column(String, nullable=False)
     timestamp = Column(Integer, nullable=False)
 
+    def __repr__(self):
+        return "<PostReply(id={},post_id={},author_id={},content='{}',timestamp={})>".format(self.id, self.post_id, self.author_id, self.content, self.timestamp)
+
 
 # create all tables
 Base.metadata.create_all(engine)
