@@ -7,6 +7,12 @@ Session = scoped_session(sessionmaker(bind=engine))
 Base = declarative_base()
 
 
+def SessionFK():
+    s = Session()
+    s.execute('PRAGMA foreign_keys=ON')
+    return s
+
+
 # declare mappings
 class User(Base):
     __tablename__ = 'users'
@@ -55,6 +61,7 @@ Base.metadata.create_all(engine)
 
 
 # APIs
+# User
 def createUser(email, username, password, ts):
     u = User(email=email, username=username, password=password, timestamp=ts)
     s = Session()
@@ -97,6 +104,27 @@ def setUserData(email, k, v):
     try:
         u = s.query(User).filter(User.email == email).one()
         setattr(u, k, v)
+        s.commit()
+    except exc.SQLAlchemyError:
+        s.rollback()
+        return False
+    else:
+        return True
+    finally:
+        Session.remove()
+
+
+# Post
+def createPost(authorEmail, title, content, timestamp):
+    author = findUserByEmail(authorEmail)
+    if author is None:
+        return False
+
+    post = Post(author_id=author.id, title=title, content=content, timestamp=timestamp)
+
+    s = SessionFK()
+    try:
+        s.add(post)
         s.commit()
     except exc.SQLAlchemyError:
         s.rollback()
