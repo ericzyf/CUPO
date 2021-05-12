@@ -137,3 +137,24 @@ def createPost(authorEmail, title, content, timestamp):
 def getAllPosts():
     return Session().query(Post).join(User, Post.author_id == User.id).with_entities(Post.id, User.email, Post.title, Post.content, Post.timestamp).all()
 
+
+# PostReply
+def createPostReply(postId, authorEmail, content, timestamp):
+    author = findUserByEmail(authorEmail)
+    if author is None:
+        return False
+
+    p = PostReply(post_id=postId, author_id=author.id, content=content, timestamp=timestamp)
+
+    s = SessionFK()
+    try:
+        s.add(p)
+        s.commit()
+    except exc.SQLAlchemyError:
+        s.rollback()
+        return False
+    else:
+        return True
+    finally:
+        Session.remove()
+
