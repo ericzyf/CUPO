@@ -19,7 +19,8 @@ def root():
         '/users/gender': ['PUT'],
         '/users/phone': ['PUT'],
         '/users/bio': ['PUT'],
-        '/auth': ['POST']
+        '/auth': ['POST'],
+        '/posts': ['POST', 'GET']
     })
 
 
@@ -146,4 +147,31 @@ def auth():
         return jsonifyUser(user), 200
     else:
         return '', 401
+
+
+@app.route('/posts', methods=['POST', 'GET'])
+def posts():
+    if request.method == 'POST':
+        req = request.json
+
+        email = req['email']
+        title = req['title']
+        content = req['content']
+        timestamp = int(time.time() * 1000)
+
+        if sql.createPost(email, title, content, timestamp):
+            return '', 201
+        else:
+            return '', 400
+
+    elif request.method == 'GET':
+        p = [
+                {
+                    'author_email': x[0],
+                    'title': x[1],
+                    'content': x[2],
+                    'timestamp': x[3]
+                } for x in sql.getAllPosts()
+            ]
+        return jsonify(p), 200
 
