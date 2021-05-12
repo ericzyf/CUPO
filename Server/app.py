@@ -181,14 +181,15 @@ def posts():
 
     elif request.method == 'GET':
         p = [
-                {
-                    'id': x[0],
-                    'author_email': x[1],
-                    'title': x[2],
-                    'content': x[3],
-                    'timestamp': x[4]
-                } for x in sql.getAllPosts()
-            ]
+            {
+                'id': x[0],
+                'author_email': x[1],
+                'title': x[2],
+                'content': x[3],
+                'timestamp': x[4]
+            }
+            for x in sql.getAllPosts()
+        ]
         return jsonify(p), 200
 
 
