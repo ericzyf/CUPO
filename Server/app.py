@@ -183,10 +183,11 @@ def posts():
         p = [
             {
                 'id': x[0],
-                'author_email': x[1],
-                'title': x[2],
-                'content': x[3],
-                'timestamp': x[4]
+                'email': x[1],
+                'username': x[2],
+                'title': x[3],
+                'content': x[4],
+                'timestamp': x[5]
             }
             for x in sql.getAllPosts()
         ]
@@ -213,8 +214,9 @@ def get_post_replies(post_id):
     replies = [
         {
             'email': x[0],
-            'content': x[1],
-            'timestamp': x[2]
+            'username': x[1],
+            'content': x[2],
+            'timestamp': x[3]
         }
         for x in sql.getPostReplies(post_id)
     ]

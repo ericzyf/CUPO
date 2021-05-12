@@ -135,7 +135,7 @@ def createPost(authorEmail, title, content, timestamp):
         Session.remove()
 
 def getAllPosts():
-    posts = Session().query(Post).join(User, Post.author_id == User.id).with_entities(Post.id, User.email, Post.title, Post.content, Post.timestamp).all()
+    posts = Session().query(Post).join(User, Post.author_id == User.id).with_entities(Post.id, User.email, User.username, Post.title, Post.content, Post.timestamp).all()
     Session.remove()
     return posts
 
@@ -161,7 +161,7 @@ def createPostReply(postId, authorEmail, content, timestamp):
         Session.remove()
 
 def getPostReplies(postId):
-    replies = Session().query(PostReply).filter_by(post_id = postId).join(User, PostReply.author_id == User.id).with_entities(User.email, PostReply.content, PostReply.timestamp).all()
+    replies = Session().query(PostReply).filter_by(post_id = postId).join(User, PostReply.author_id == User.id).with_entities(User.email, User.username, PostReply.content, PostReply.timestamp).all()
     Session.remove()
     return replies
 
