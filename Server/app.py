@@ -19,6 +19,7 @@ def root():
         '/users/gender': ['PUT'],
         '/users/phone': ['PUT'],
         '/users/bio': ['PUT'],
+        '/user_info': ['PUT'],
         '/auth': ['POST'],
         '/posts': ['POST', 'GET']
     })
@@ -132,6 +133,18 @@ def users_bio():
 
     if sql.setUserData(email, 'bio', bio):
         return '', 201
+    else:
+        return '', 404
+
+
+@app.route('/user_info', methods=['PUT'])
+def user_info():
+    req = request.json
+    email = req['email']
+
+    user = sql.findUserByEmail(email)
+    if user is not None:
+        return jsonifyUser(user), 200
     else:
         return '', 404
 
