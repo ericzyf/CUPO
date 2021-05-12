@@ -22,7 +22,8 @@ def root():
         '/user_info': ['PUT'],
         '/auth': ['POST'],
         '/posts': ['POST', 'GET'],
-        '/post_replies': ['POST']
+        '/post_replies': ['POST'],
+        '/post_replies/<post_id>': ['GET']
     })
 
 
@@ -204,4 +205,17 @@ def post_replies():
         return '', 201
     else:
         return '', 400
+
+
+@app.route('/post_replies/<post_id>')
+def get_post_replies(post_id):
+    replies = [
+        {
+            'email': x[0],
+            'content': x[1],
+            'timestamp': x[2]
+        }
+        for x in sql.getPostReplies(post_id)
+    ]
+    return jsonify(replies), 200
 
