@@ -21,7 +21,8 @@ def root():
         '/users/bio': ['PUT'],
         '/user_info': ['PUT'],
         '/auth': ['POST'],
-        '/posts': ['POST', 'GET']
+        '/posts': ['POST', 'GET'],
+        '/post_replies': ['POST']
     })
 
 
@@ -188,4 +189,19 @@ def posts():
                 } for x in sql.getAllPosts()
             ]
         return jsonify(p), 200
+
+
+@app.route('/post_replies', methods=['POST'])
+def post_replies():
+    req = request.json
+
+    postId = req['post_id']
+    authorEmail = req['email']
+    content = req['content']
+    timestamp = int(time.time() * 1000)
+
+    if sql.createPostReply(postId, authorEmail, content, timestamp):
+        return '', 201
+    else:
+        return '', 400
 
