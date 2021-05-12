@@ -113,9 +113,6 @@ def setUserData(email, k, v):
     finally:
         Session.remove()
 
-def getAllUsers():
-    return Session().query(User).all()
-
 
 # Post
 def createPost(authorEmail, title, content, timestamp):
