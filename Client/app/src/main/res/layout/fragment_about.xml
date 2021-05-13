@@ -14,7 +14,7 @@
             android:id="@+id/aboutCupoLogo"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="140dp"
             android:src="@drawable/cupo_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:text="CSCI3310 Group 3"
+            android:textSize="24dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="ZHANG Yifan"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="@+id/aboutTitle"
             app:layout_constraintStart_toStartOf="@+id/aboutTitle"
             app:layout_constraintTop_toBottomOf="@+id/aboutTitle" />
@@ -47,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="FU Heming"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="@+id/aboutAuthor1"
             app:layout_constraintStart_toStartOf="@+id/aboutAuthor1"
             app:layout_constraintTop_toBottomOf="@+id/aboutAuthor1" />
@@ -57,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="BO Fangying"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="@+id/aboutAuthor2"
             app:layout_constraintStart_toStartOf="@+id/aboutAuthor2"
             app:layout_constraintTop_toBottomOf="@+id/aboutAuthor2" />
