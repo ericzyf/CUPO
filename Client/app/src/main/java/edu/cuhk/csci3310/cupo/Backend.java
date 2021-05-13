@@ -281,4 +281,14 @@ public final class Backend {
 
         httpClient.newCall(request).enqueue(cb);
     }
+
+    public void getAllPosts(Callback cb) {
+        Request request = new Request.Builder()
+                .url(api("/posts"))
+                .build();
+
+        Log.d("cupo", "GET /posts");
+
+        httpClient.newCall(request).enqueue(cb);
+    }
 }
