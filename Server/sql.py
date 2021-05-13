@@ -135,7 +135,7 @@ def createPost(authorEmail, title, content, timestamp):
         Session.remove()
 
 def getAllPosts():
-    posts = Session().query(Post).join(User, Post.author_id == User.id).with_entities(Post.id, User.email, User.username, Post.title, Post.content, Post.timestamp).all()
+    posts = Session().query(Post).join(User, Post.author_id == User.id).with_entities(Post.id, User.email, User.username, Post.title, Post.content, Post.timestamp).order_by(Post.timestamp.desc()).all()
     Session.remove()
     return posts
 
