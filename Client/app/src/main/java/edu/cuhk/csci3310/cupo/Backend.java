@@ -282,6 +282,27 @@ public final class Backend {
         httpClient.newCall(request).enqueue(cb);
     }
 
+    public void createPost(final String email, final String title, final String content, Callback cb) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("email", email);
+            json.put("title", title);
+            json.put("content", content);
+        } catch (Exception e) {
+
+        }
+
+        RequestBody body = RequestBody.create(json.toString(), JSON);
+        Request request = new Request.Builder()
+                .url(api("/posts"))
+                .post(body)
+                .build();
+
+        Log.d("cupo", "POST /posts\n" + json.toString());
+
+        httpClient.newCall(request).enqueue(cb);
+    }
+
     public void getAllPosts(Callback cb) {
         Request request = new Request.Builder()
                 .url(api("/posts"))
