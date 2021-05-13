@@ -320,6 +320,25 @@ public final class Backend {
         httpClient.newCall(request).enqueue(cb);
     }
 
+    public void userInfo(final String email, Callback cb) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("email", email);
+        } catch (Exception e) {
+
+        }
+
+        RequestBody body = RequestBody.create(json.toString(), JSON);
+        Request request = new Request.Builder()
+                .url(api("/user_info"))
+                .put(body)
+                .build();
+
+        Log.d("cupo", "PUT /user_info\n" + json.toString());
+
+        httpClient.newCall(request).enqueue(cb);
+    }
+
     public void createPost(final String email, final String title, final String content, Callback cb) {
         JSONObject json = new JSONObject();
         try {

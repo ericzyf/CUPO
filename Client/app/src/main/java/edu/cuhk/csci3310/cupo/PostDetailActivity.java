@@ -38,7 +38,9 @@ public class PostDetailActivity extends AppCompatActivity {
         postDetailUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO
+                Intent intent = new Intent(getApplicationContext(), ViewProfileActivity.class);
+                intent.putExtra("email", post.getEmail());
+                startActivity(intent);
             }
         });
     }
