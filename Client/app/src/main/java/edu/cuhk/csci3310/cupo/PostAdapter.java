@@ -1,6 +1,7 @@
 package edu.cuhk.csci3310.cupo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +65,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-            // TODO
+            context.startActivity(new Intent(context, PostDetailActivity.class));
         }
     }
 }
