@@ -33,13 +33,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Backend.Post post = posts.get(position);
-
-        holder.title.setText(post.getTitle());
-        holder.username.setText(post.getUsername());
-
-        Timestamp ts = new Timestamp(post.getTimestamp());
-        holder.time.setText(ts.toString());
+        holder.bindPost(posts.get(position));
     }
 
     @Override
@@ -49,9 +43,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView title;
-        public TextView username;
-        public TextView time;
+        private TextView title;
+        private TextView username;
+        private TextView time;
+        private Backend.Post post;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,8 +54,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             title = itemView.findViewById(R.id.postTitle);
             username = itemView.findViewById(R.id.postUsername);
             time = itemView.findViewById(R.id.postTime);
+            post = null;
 
             itemView.setOnClickListener(this);
+        }
+
+        public void bindPost(final Backend.Post p) {
+            post = p;
+
+            title.setText(p.getTitle());
+            username.setText(p.getUsername());
+            time.setText(new Timestamp(p.getTimestamp()).toString());
         }
 
         @Override
