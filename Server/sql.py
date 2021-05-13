@@ -161,7 +161,7 @@ def createPostReply(postId, authorEmail, content, timestamp):
         Session.remove()
 
 def getPostReplies(postId):
-    replies = Session().query(PostReply).filter_by(post_id = postId).join(User, PostReply.author_id == User.id).with_entities(User.email, User.username, PostReply.content, PostReply.timestamp).all()
+    replies = Session().query(PostReply).filter_by(post_id = postId).join(User, PostReply.author_id == User.id).with_entities(User.email, User.username, PostReply.content, PostReply.timestamp).order_by(PostReply.timestamp.asc()).all()
     Session.remove()
     return replies
 
