@@ -1,5 +1,6 @@
 package edu.cuhk.csci3310.cupo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -51,7 +52,7 @@ public class HomeFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("cupo", "Create post fab clicked");
+                startActivity(new Intent(getContext(), CreatePostActivity.class));
             }
         });
 
