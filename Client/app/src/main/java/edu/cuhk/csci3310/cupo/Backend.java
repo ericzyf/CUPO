@@ -54,6 +54,55 @@ public final class Backend {
         }
     }
 
+    public static class Post {
+        private long id;
+        private String email;
+        private String username;
+        private String title;
+        private String content;
+        private long timestamp;
+
+        public Post(
+                final long id,
+                final String email,
+                final String username,
+                final String title,
+                final String content,
+                final long timestamp
+        ) {
+            this.id = id;
+            this.email = email;
+            this.username = username;
+            this.title = title;
+            this.content = content;
+            this.timestamp = timestamp;
+        }
+
+        public long getId() {
+            return id;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public long getTimestamp() {
+            return timestamp;
+        }
+    }
+
     public void verificationPost(final String email, Callback cb) {
         JSONObject json = new JSONObject();
         try {
