@@ -2,6 +2,7 @@ package edu.cuhk.csci3310.cupo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -62,6 +63,11 @@ public class CreatePostActivity extends AppCompatActivity {
                     public void run() {
                         if (response.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Post created successfully", Toast.LENGTH_SHORT).show();
+
+                            startActivity(
+                                    new Intent(getApplicationContext(), MainActivity.class)
+                                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK)
+                            );
                         } else {
                             Toast.makeText(getApplicationContext(), "Failed to create post. Please try again later.", Toast.LENGTH_SHORT).show();
                         }
