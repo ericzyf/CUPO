@@ -141,6 +141,36 @@ public final class Backend {
         }
     }
 
+    public static class PostReply {
+        private String email;
+        private String username;
+        private String content;
+        private long timestamp;
+
+        public PostReply(final String email, final String username, final String content, final long timestamp) {
+            this.email = email;
+            this.username = username;
+            this.content = content;
+            this.timestamp = timestamp;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public long getTimestamp() {
+            return timestamp;
+        }
+    }
+
     public void verificationPost(final String email, Callback cb) {
         JSONObject json = new JSONObject();
         try {
@@ -387,6 +417,16 @@ public final class Backend {
                 .build();
 
         Log.d("cupo", "POST /post_replies\n" + json.toString());
+
+        httpClient.newCall(request).enqueue(cb);
+    }
+
+    public void getPostReplies(final long postId, Callback cb) {
+        Request request = new Request.Builder()
+                .url(api("/post_replies/" + postId))
+                .build();
+
+        Log.d("cupo", "GET /post_replies/" + postId);
 
         httpClient.newCall(request).enqueue(cb);
     }
