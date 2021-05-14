@@ -2,6 +2,7 @@ package edu.cuhk.csci3310.cupo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +20,7 @@ import okhttp3.Response;
 
 public class ReplyPostActivity extends AppCompatActivity {
 
-    private long postId;
+    private Backend.Post post;
     private Button submitReplyButton;
     private EditText replyContent;
 
@@ -28,7 +29,7 @@ public class ReplyPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply_post);
 
-        postId = getIntent().getLongExtra("postId", -1);
+        post = getIntent().getParcelableExtra("post");
         submitReplyButton = findViewById(R.id.submitReplyButton);
         replyContent = findViewById(R.id.replyContent);
 
@@ -36,7 +37,7 @@ public class ReplyPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String content = replyContent.getText().toString();
-                Backend.getInstance().createPostReply(postId, MainActivity.USER.email, content, new Callback() {
+                Backend.getInstance().createPostReply(post.getId(), MainActivity.USER.email, content, new Callback() {
                     @Override
                     public void onFailure(@NotNull Call call, @NotNull IOException e) {
                         Log.d("cupo", e.toString());
@@ -49,6 +50,11 @@ public class ReplyPostActivity extends AppCompatActivity {
                             public void run() {
                                 if (response.isSuccessful()) {
                                     Toast.makeText(getApplicationContext(), "Reply successfully", Toast.LENGTH_SHORT).show();
+
+                                    Intent intent = new Intent(getApplicationContext(), PostDetailActivity.class)
+                                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.putExtra("post", post);
+                                    startActivity(intent);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Failed to reply to this post", Toast.LENGTH_SHORT).show();
                                 }

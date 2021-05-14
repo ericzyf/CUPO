@@ -54,7 +54,7 @@ public class PostDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ReplyPostActivity.class);
-                intent.putExtra("postId", post.getId());
+                intent.putExtra("post", post);
                 startActivity(intent);
             }
         });
@@ -113,5 +113,13 @@ public class PostDetailActivity extends AppCompatActivity {
     private void setupRecyclerView(final List<Backend.PostReply> replies) {
         repliesRecyclerView.setAdapter(new PostReplyAdapter(this, replies));
         repliesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(
+                new Intent(this, MainActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK)
+        );
     }
 }
