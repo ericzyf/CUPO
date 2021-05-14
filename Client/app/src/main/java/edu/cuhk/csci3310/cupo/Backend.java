@@ -369,4 +369,25 @@ public final class Backend {
 
         httpClient.newCall(request).enqueue(cb);
     }
+
+    public void createPostReply(final long postId, final String email, final String content, Callback cb) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("post_id", postId);
+            json.put("email", email);
+            json.put("content", content);
+        } catch (Exception e) {
+
+        }
+
+        RequestBody body = RequestBody.create(json.toString(), JSON);
+        Request request = new Request.Builder()
+                .url(api("/post_replies"))
+                .post(body)
+                .build();
+
+        Log.d("cupo", "POST /post_replies\n" + json.toString());
+
+        httpClient.newCall(request).enqueue(cb);
+    }
 }
