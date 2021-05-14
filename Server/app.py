@@ -12,7 +12,7 @@ CORS(app)
 @app.route('/')
 def root():
     return jsonify({
-        '/v': ['POST', 'PUT'],
+        '/v': ['POST'],
         '/users': ['POST'],
         '/users/username': ['PUT'],
         '/users/password': ['PUT'],
@@ -27,27 +27,16 @@ def root():
     })
 
 
-@app.route('/v', methods=['POST', 'PUT'])
+@app.route('/v', methods=['POST'])
 def verification_code():
     req = request.json
-
-    if request.method == 'POST':
-        # send verification code to user
-        email = req['email']
-        if utils.isCUHKEmail(email):
-            verification.sendCode(email)
-            return '', 202
-        else:
-            return '', 400
-
-    elif request.method == 'PUT':
-        # verify user's code
-        email = req['email']
-        code = req['code']
-        if verification.verifyCode(email, code):
-            return '', 200
-        else:
-            return '', 404
+    # send verification code to user
+    email = req['email']
+    if utils.isCUHKEmail(email):
+        verification.sendCode(email)
+        return '', 202
+    else:
+        return '', 400
 
 
 def jsonifyUser(user):
