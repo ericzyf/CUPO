@@ -30,6 +30,7 @@ public class SignupActivity extends AppCompatActivity {
         EditText signupEmailInput = findViewById(R.id.signupEmailInput);
         EditText signupPasswordInput = findViewById(R.id.signupPasswordInput);
         EditText signupPasswordInput2 = findViewById(R.id.signupPasswordInput2);
+        EditText signupCode = findViewById(R.id.signupCode);
         Button signupButton = findViewById(R.id.signupButton);
         ProgressBar signupProgress = findViewById(R.id.signupProgress);
 
@@ -39,7 +40,8 @@ public class SignupActivity extends AppCompatActivity {
                 handleSignup(
                         signupEmailInput.getText().toString(),
                         signupPasswordInput.getText().toString(),
-                        signupPasswordInput2.getText().toString()
+                        signupPasswordInput2.getText().toString(),
+                        signupCode.getText().toString()
                 );
             }
         });
@@ -81,10 +83,10 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-    private void handleSignup(final String email, final String pwd, final String pwd2) {
-        Log.d("cupo", email + "," + pwd + "," + pwd2);
+    private void handleSignup(final String email, final String pwd, final String pwd2, final String code) {
+        Log.d("cupo", email + "," + pwd + "," + pwd2 + "," + code);
 
-        if (email.length() == 0 || pwd.length() == 0 || pwd2.length() == 0) {
+        if (email.length() == 0 || pwd.length() == 0 || pwd2.length() == 0 || code.length() == 0) {
             Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -100,7 +102,7 @@ public class SignupActivity extends AppCompatActivity {
         final ProgressBar progress = findViewById(R.id.signupProgress);
         progress.setVisibility(View.VISIBLE);
 
-        Backend.getInstance().createUser(email, pwd, new Callback() {
+        Backend.getInstance().createUser(email, pwd, code, new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 Log.d("cupo", e.toString());
@@ -132,7 +134,7 @@ public class SignupActivity extends AppCompatActivity {
                                             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK)
                             );
                         } else {
-                            Toast.makeText(getApplicationContext(), "Account already exists", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Wrong verification code or account already exists", Toast.LENGTH_SHORT).show();
                         }
 
                         button.setVisibility(View.VISIBLE);

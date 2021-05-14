@@ -21,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="CUHK Email"
         android:inputType="textEmailAddress"
@@ -36,8 +37,8 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/signupEmailInput"
+        app:layout_constraintStart_toStartOf="@+id/signupEmailInput"
         app:layout_constraintTop_toBottomOf="@+id/signupEmailInput" />
 
     <EditText
@@ -48,8 +49,8 @@
         android:ems="10"
         android:hint="Confirm password"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/signupPasswordInput"
+        app:layout_constraintStart_toStartOf="@+id/signupPasswordInput"
         app:layout_constraintTop_toBottomOf="@+id/signupPasswordInput" />
 
     <Button
@@ -60,7 +61,7 @@
         android:text="Sign Up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupPasswordInput2" />
+        app:layout_constraintTop_toBottomOf="@+id/signupCode" />
 
     <ProgressBar
         android:id="@+id/signupProgress"
@@ -72,16 +73,28 @@
         android:indeterminateTintMode="src_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupPasswordInput2" />
+        app:layout_constraintTop_toBottomOf="@+id/signupCode" />
 
     <Button
         android:id="@+id/signupV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="8dp"
         android:text="Send"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupButton" />
+        app:layout_constraintBottom_toBottomOf="@+id/signupCode"
+        app:layout_constraintStart_toEndOf="@+id/signupCode"
+        app:layout_constraintTop_toTopOf="@+id/signupCode" />
+
+    <EditText
+        android:id="@+id/signupCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Verification code"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/signupPasswordInput2"
+        app:layout_constraintStart_toStartOf="@+id/signupPasswordInput2"
+        app:layout_constraintTop_toBottomOf="@+id/signupPasswordInput2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

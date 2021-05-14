@@ -190,31 +190,12 @@ public final class Backend {
         httpClient.newCall(request).enqueue(cb);
     }
 
-    public void verificationPut(final String email, final String code, Callback cb) {
-        JSONObject json = new JSONObject();
-        try {
-            json.put("email", email);
-            json.put("code", code);
-        } catch (Exception e) {
-
-        }
-
-        RequestBody body = RequestBody.create(json.toString(), JSON);
-        Request request = new Request.Builder()
-                .url(api("/v"))
-                .put(body)
-                .build();
-
-        Log.d("cupo", "PUT /v " + email + " " + code);
-
-        httpClient.newCall(request).enqueue(cb);
-    }
-
-    public void createUser(final String email, final String password, Callback cb) {
+    public void createUser(final String email, final String password, final String code, Callback cb) {
         JSONObject json = new JSONObject();
         try {
             json.put("email", email);
             json.put("password", password);
+            json.put("code", code);
         } catch (Exception e) {
 
         }
