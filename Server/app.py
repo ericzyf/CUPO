@@ -57,11 +57,14 @@ def users():
     email = req['email']
     username = email  # initial username is email
     password = utils.passwordHash(req['password'], ts)  # hashed password
+    code = req['code']
 
-    if sql.createUser(email, username, password, ts):
-        return jsonifyUser( sql.User(email=email, username=username, password=password, timestamp=ts, gender='', phone='', bio='') ), 201
-    else:
+    if not verification.verifyCode(email, code):
+        return '', 401
+    elif not sql.createUser(email, username, password, ts):
         return '', 409
+    else:
+        return jsonifyUser( sql.User(email=email, username=username, password=password, timestamp=ts, gender='', phone='', bio='') ), 201
 
 
 @app.route('/users/username', methods=['PUT'])
